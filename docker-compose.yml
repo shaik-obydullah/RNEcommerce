@@ -1,0 +1,15 @@
+services:
+  android_env:
+    build: ./docker/android
+    container_name: rnecommerce_android_env
+    stdin_open: true
+    tty: true
+    working_dir: /app
+    privileged: true          # USB access for adb -> your device
+    network_mode: host        # Metro + adb + LAN share host network
+    volumes:
+      - .:/app
+      - gradle_cache:/root/.gradle   # persists deps between rebuilds
+
+volumes:
+  gradle_cache:
